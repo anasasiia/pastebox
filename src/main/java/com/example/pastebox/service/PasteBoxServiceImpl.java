@@ -7,6 +7,7 @@ import com.example.pastebox.request.PublicStatus;
 import com.example.pastebox.response.PasteBoxResponse;
 import com.example.pastebox.response.PasteBoxUrl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequiredArgsConstructor
 @ConfigurationProperties(prefix = "app")
 public class PasteBoxServiceImpl implements PasteBoxService {
+    @Value("${target.host}")
     private String host;
+    @Value("${public.list.size}")
     private int publicListSize;
+
     private final PasteBoxRepository repository;
     private final AtomicInteger idGenerator = new AtomicInteger(0);
 
